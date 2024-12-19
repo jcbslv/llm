@@ -16,12 +16,12 @@ for i in range(0, len(documents), 4):
     for doc in chunk:
         print(doc)
     embeddings = model.encode(chunk, normalize_embeddings=True)
-    print(type(embeddings), embeddings.shape)
+    print('\n',type(embeddings), embeddings.shape)
     # for e in embeddings:
     #     print(e)
     similarities = model.similarity(embeddings, embeddings)
     print(similarities)
-    print()
+    print('------------------------------------------------------------------------------------------------------------')
     
     # heatmaps
     plt.figure(figsize=(6, 5))
@@ -35,7 +35,7 @@ for i in range(0, len(documents), 4):
     plt.yticks(ticks=np.arange(len(chunk)), labels=vector_labels)
 
     plt.tight_layout()
-    plt.savefig('plot.png')  # Save the plot to a file
+    plt.savefig(f'plots/plot{i}.png')  # Save the plot to a file
 
 
 
