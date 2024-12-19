@@ -35,7 +35,7 @@ for i in range(0, len(documents), 4):
     plt.yticks(ticks=np.arange(len(chunk)), labels=vector_labels)
 
     plt.tight_layout()
-    plt.savefig(f'plots/plot{i}.png')  # Save the plot to a file
+    plt.savefig('plots/plot.png')  # Save the plot to a file
 
 
 
