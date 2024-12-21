@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 import matplotlib.pyplot as plt
 
-model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
+model = SentenceTransformer('sentence-transformers/average_word_embeddings_komninos')
 
 with open('Justifications1Col.txt', 'r') as file:
     documents = file.readlines()
@@ -16,7 +16,7 @@ for i in range(0, len(documents), 4):
     for doc in chunk:
         print(doc)
     embeddings = model.encode(chunk, normalize_embeddings=True)
-    print('\n',type(embeddings), embeddings.shape)
+    print('\n',type(embeddings), embeddings.shape, i)
     # for e in embeddings:
     #     print(e)
     similarities = model.similarity(embeddings, embeddings)
@@ -35,7 +35,7 @@ for i in range(0, len(documents), 4):
     plt.yticks(ticks=np.arange(len(chunk)), labels=vector_labels)
 
     plt.tight_layout()
-    plt.savefig('plots/plot.png')  # Save the plot to a file
+    plt.savefig(f'komninos/plot{i}.png')  # Save the plot to a file
 
 
 
