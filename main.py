@@ -3,8 +3,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 model = SentenceTransformer(
-    "sentence-transformers/gtr-t5-xl")
-    # trust_remote_code=True)
+    # 'thenlper/gte-base')
+    # 'thenlper/gte-large')
+    # 'Mihaiii/gte-micro')
+    # "Mihaiii/Ivysaur")
+    # 'sentence-transformers/average_word_embeddings_glove.6B.300d')
+    'sentence-transformers/average_word_embeddings_komninos')
+    # 'sentence-transformers/all-mpnet-base-v2')
+    # 'sentence-transformers/all-MiniLM-L12-v2')
+    # 'sentence-transformers/sentence-t5-xl')
+    # 'sentence-transformers/gtr-t5-xl')
+    # "dunzhang/stella_en_1.5B_v5", trust_remote_code=True)
+    # "dunzhang/stella_en_400M_v5",
+    # trust_remote_code=True,
     # device="cpu",
     # config_kwargs={"use_memory_efficient_attention": False, "unpad_inputs": False})
 
@@ -39,7 +50,7 @@ for i in range(0, len(documents), 4):
     plt.yticks(ticks=np.arange(len(chunk)), labels=vector_labels)
 
     plt.tight_layout()
-    plt.savefig(f'gtr-t5-xl/plot{i}.png')  # Save the plot to a file
+    plt.savefig(f'gte-base/plot{i}.png')  # Save the plot to a file
 
 
 
