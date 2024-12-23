@@ -50,7 +50,7 @@ for i in range(0, len(documents), 4):
     plt.yticks(ticks=np.arange(len(chunk)), labels=vector_labels)
 
     plt.tight_layout()
-    plt.savefig(f'gte-base/plot{i}.png')  # Save the plot to a file
+    plt.savefig(f'gte-base/plot{i}.png')  # Save plot to file
 
 
 
