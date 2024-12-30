@@ -7,11 +7,16 @@ modelName = str(
     # 'thenlper/gte-large')
     # 'Mihaiii/gte-micro')
     # "Mihaiii/Ivysaur")
+    # "Mihaiii/Bulbasaur")
+    # "Mihaiii/Venusaur")
+    'intfloat/e5-small-v2')
+    # 'intfloat/e5-base-v2')
+    # 'intfloat/e5-large-v2')
     # 'Snowflake/snowflake-arctic-embed-l-v2.0')
     # 'sentence-transformers/average_word_embeddings_glove.6B.300d')
     # 'sentence-transformers/average_word_embeddings_komninos')
     # 'sentence-transformers/all-mpnet-base-v2')
-    'sentence-transformers/all-MiniLM-L12-v2')
+    # 'sentence-transformers/all-MiniLM-L12-v2')
     # 'sentence-transformers/sentence-t5-xl')
     # 'sentence-transformers/gtr-t5-xl')
     # "dunzhang/stella_en_1.5B_v5")
@@ -23,7 +28,6 @@ model = SentenceTransformer(modelName)
     # trust_remote_code=True,
     # device="cpu",
     # config_kwargs={"use_memory_efficient_attention": False, "unpad_inputs": False})
-    
 
 with open('Justifications1Col.txt', 'r') as file:
     documents = file.readlines()
