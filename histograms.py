@@ -13,8 +13,8 @@ modelName = str(
     # 'intfloat/e5-base-v2')
     # 'intfloat/e5-large-v2')
     # 'Snowflake/snowflake-arctic-embed-l-v2.0')
-    'sentence-transformers/average_word_embeddings_glove.6B.300d')
-    # 'sentence-transformers/average_word_embeddings_komninos')
+    # 'sentence-transformers/average_word_embeddings_glove.6B.300d')
+    'sentence-transformers/average_word_embeddings_komninos')
     # 'sentence-transformers/all-mpnet-base-v2')
     # 'sentence-transformers/all-MiniLM-L12-v2')
     # 'sentence-transformers/sentence-t5-xl')
@@ -42,11 +42,9 @@ similarities = model.similarity(embeddings, embeddings)
 lowerTriangle = []
 for i in range(len(documents)):
     for j in range(i):
-        lowerTriangle.append(round(similarities[i][j].item(), 3))
+        lowerTriangle.append(similarities[i][j].item())
 
 plt.hist(lowerTriangle, 50)
 plt.savefig(f'results/{modelName}/histogram.png')
 plt.close()
-
-
 
