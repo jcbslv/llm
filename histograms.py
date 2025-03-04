@@ -44,7 +44,7 @@ for i in range(len(documents)):
     for j in range(i):
         lowerTriangle.append(similarities[i][j].item())
 
-plt.hist(lowerTriangle, 50)
+plt.hist(lowerTriangle, 50, density=True)
 plt.savefig(f'results/{modelName}/histogram.png')
 plt.close()
 
