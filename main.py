@@ -15,8 +15,8 @@ modelName = str(
     # 'Snowflake/snowflake-arctic-embed-l-v2.0')
     # 'sentence-transformers/average_word_embeddings_glove.6B.300d')
     # 'sentence-transformers/average_word_embeddings_komninos')
-    # 'sentence-transformers/all-mpnet-base-v2')
-    'sentence-transformers/all-MiniLM-L12-v2')
+    'sentence-transformers/all-mpnet-base-v2')
+    # 'sentence-transformers/all-MiniLM-L12-v2')
     # 'sentence-transformers/sentence-t5-xl')
     # 'sentence-transformers/gtr-t5-xl')
     # "dunzhang/stella_en_1.5B_v5")
@@ -56,20 +56,24 @@ for i in range(0, len(documents), 4):
         for j in range(i):
             lowerTriangle.append(round(similarities[i][j], 4))
 # print(lowerTriangle)
-plt.hist(lowerTriangle, 11, density=True)
+plt.hist(lowerTriangle, 11, density=False)
 plt.savefig(f'results/{modelName}/simHistogram.png')
 plt.close()
 
 allPairs = []
-seperatedPairs = []
+seperatedPairs = [[],[],[],[],[],[]]
 pairMedians = []
 
 for j in range(6):
     for i in range(j, len(lowerTriangle), 6):
-        allPairs.append(lowerTriangle[i])
+        seperatedPairs[j].append(lowerTriangle[i])
 
-for i in range(0, 594, 99):
-    seperatedPairs.append([allPairs[j+i] for j in range(99)])
+# for j in range(6):
+#     for i in range(j, len(lowerTriangle), 6):
+#         allPairs.append(lowerTriangle[i])
+
+# for i in range(0, 594, 99):
+#     seperatedPairs.append([allPairs[j+i] for j in range(99)])
 
 for pair in seperatedPairs:
     pairMedians.append(np.median(pair))
