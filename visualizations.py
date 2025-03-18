@@ -16,10 +16,10 @@ modelName = str(
     # 'intfloat/e5-base-v2')
     # 'intfloat/e5-large-v2')
     # 'Snowflake/snowflake-arctic-embed-l-v2.0')
-    'sentence-transformers/average_word_embeddings_glove.6B.300d')
+    # 'sentence-transformers/average_word_embeddings_glove.6B.300d')
     # 'sentence-transformers/average_word_embeddings_komninos')
     # 'sentence-transformers/all-mpnet-base-v2')
-    # 'sentence-transformers/all-MiniLM-L12-v2')
+    'sentence-transformers/all-MiniLM-L12-v2')
     # 'sentence-transformers/sentence-t5-xl')
     # 'sentence-transformers/gtr-t5-xl')
     # "dunzhang/stella_en_1.5B_v5")
@@ -68,13 +68,8 @@ labels = kmeans.labels_
 # print(labels)
 # for i in range(len(reduced_embeddings)):
 #     print(reduced_embeddings[i])
-
 plt.figure(figsize=(8, 6))
-for i, (x, y) in enumerate(reduced_embeddings):
-    plt.annotate(i, (x, y), textcoords="offset points", xytext=(0,10), ha='center')  
-# plt.show()
-
-plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], marker='*', s=100, c='Silver', label='Centroids')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], marker='*', s=150, c='Chartreuse', label='Centroids')
 plt.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1], c=labels)
 plt.title("K-means Clustering")
 
@@ -92,6 +87,8 @@ for i in range(0, len(reduced_embeddings), 4):
 
     # print("Centroid:", (centroid_x, centroid_y))
 
+for i, (x, y) in enumerate(reduced_embeddings):
+    plt.annotate(i, (x, y), textcoords="offset points", xytext=(0,10), ha='center')  
 plt.show()
 
 #########################################################################################
