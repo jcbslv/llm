@@ -4,27 +4,9 @@ import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
 from sklearn.cluster import KMeans
 from sklearn.neighbors import KNeighborsClassifier
+from chooseModel import chooseModel
 
-modelName = str(
-    # 'thenlper/gte-base')
-    # 'thenlper/gte-large')
-    # 'Mihaiii/gte-micro')
-    # 'Mihaiii/Ivysaur')
-    # 'Mihaiii/Bulbasaur')
-    # 'Mihaiii/Venusaur')
-    # 'intfloat/e5-small-v2')
-    # 'intfloat/e5-base-v2')
-    # 'intfloat/e5-large-v2')
-    # 'Snowflake/snowflake-arctic-embed-l-v2.0')
-    # 'sentence-transformers/average_word_embeddings_glove.6B.300d')
-    # 'sentence-transformers/average_word_embeddings_komninos')
-    # 'sentence-transformers/all-mpnet-base-v2')
-    'sentence-transformers/all-MiniLM-L12-v2')
-    # 'sentence-transformers/sentence-t5-xl')
-    # 'sentence-transformers/gtr-t5-xl')
-    # "dunzhang/stella_en_1.5B_v5")
-    # "dunzhang/stella_en_400M_v5")
-   
+modelName = chooseModel()   
 model = SentenceTransformer(modelName)
     # "dunzhang/stella_en_1.5B_v5", trust_remote_code=True)
     # "dunzhang/stella_en_400M_v5",
@@ -41,7 +23,7 @@ with open('Justifications1Col.txt', 'r') as file:
 documents = [line.strip() for line in documents]
 embeddings = model.encode(documents, normalize_embeddings=False)
 
-#for e5 models
+# #for e5 models
 # queries = []
 # for each in documents:
 #     queries.append(f"query: {each}")
@@ -93,7 +75,7 @@ plt.show()
 
 #########################################################################################
 
-# Get cosine similarity
+# # Get cosine similarity
 # similarities = model.similarity(embeddings, embeddings)
 
 
@@ -101,9 +83,12 @@ plt.show()
 # for i in range(len(documents)):
 #     for j in range(i):
 #         lowerTriangle.append(similarities[i][j].item())
-
+# plt.figure(figsize=(9, 7))
 # plt.hist(lowerTriangle, 50, density=True)
-# plt.savefig(f'results/{modelName}/histogram.png')
+# plt.title(f'Distribution of All Cosine Similarities\n{modelName}')
+# plt.xlabel('Similarity Score')
+# plt.ylabel('Frequency')
+# plt.savefig(f'results/{modelName}/graphs/allScenHist.png')
 
 # plt.show()
 

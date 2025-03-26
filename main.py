@@ -1,27 +1,9 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
 import matplotlib.pyplot as plt
+from chooseModel import chooseModel
 
-modelName = str(
-    # 'thenlper/gte-base')
-    # 'thenlper/gte-large')
-    # 'Mihaiii/gte-micro')
-    # "Mihaiii/Ivysaur")
-    # "Mihaiii/Bulbasaur")
-    # "Mihaiii/Venusaur")
-    'intfloat/e5-small-v2')
-    # 'intfloat/e5-base-v2')
-    # 'intfloat/e5-large-v2')
-    # 'Snowflake/snowflake-arctic-embed-l-v2.0')
-    # 'sentence-transformers/average_word_embeddings_glove.6B.300d')
-    # 'sentence-transformers/average_word_embeddings_komninos')
-    # 'sentence-transformers/all-mpnet-base-v2')
-    # 'sentence-transformers/all-MiniLM-L12-v2')
-    # 'sentence-transformers/sentence-t5-xl')
-    # 'sentence-transformers/gtr-t5-xl')
-    # "dunzhang/stella_en_1.5B_v5")
-    # "dunzhang/stella_en_400M_v5")
-   
+modelName = chooseModel()   
 model = SentenceTransformer(modelName)
     # "dunzhang/stella_en_1.5B_v5", trust_remote_code=True)
     # "dunzhang/stella_en_400M_v5",
@@ -56,8 +38,12 @@ for i in range(0, len(documents), 4):
         for j in range(i):
             lowerTriangle.append(round(similarities[i][j], 4))
 # print(lowerTriangle)
-plt.hist(lowerTriangle, 11, density=False)
-plt.savefig(f'results/{modelName}/simHistogram.png')
+plt.figure(figsize=(9, 7))
+plt.hist(lowerTriangle, 15, density=True)
+plt.title(f'Distribution of Cosine Similarities\nWithin Same Scenarios\n{modelName}',pad=10)
+plt.xlabel('Similarity Score')
+plt.ylabel('Frequency')
+plt.savefig(f'results/{modelName}/graphs/sameScenHist.png')
 plt.close()
 
 allPairs = []
@@ -82,19 +68,19 @@ for median in pairMedians:
     print(median)
         
 
-# # Create a figure and axis object
-# fig, ax = plt.subplots()
-
-# # Plot the bar graph
-# ax.bar(range(len(lowerTriangle)), lowerTriangle)
-
-# # Add title and labels
-# ax.set_title('Bar Graph Example')
-# ax.set_xlabel('Index')
-# ax.set_ylabel('Value')
-
-# plt.savefig(f'results/{modelName}/bar.png')  # Save plot to file
-# plt.close()
+xLabels = ["0ShotCoT/\n0Shot", "1Shot/\n0Shot", "1Shot/\n0ShotCoT", "2shot/\n0Shot", "2Shot/\n0ShotCoT", "2Shot/\n1Shot"]
+plt.figure(figsize=(9, 7))
+plt.bar(xLabels, pairMedians)
+    
+plt.title(f'Median Similarity Scores Across Same Scenario Pairs\n{modelName}', pad=10)
+plt.xlabel('Justification Pairs')
+plt.ylabel('Median Similarity Score')
+for i in range(len(xLabels)):
+    plt.text(i, pairMedians[i], pairMedians[i], ha = 'center')
+# addlabels(xLabels, pairMedians)
+plt.savefig(f'results/{modelName}/graphs/medianBar.png')  # Save plot to file
+plt.show()
+plt.close()
 
 
 
