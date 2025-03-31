@@ -53,7 +53,7 @@ labels = kmeans.labels_
 plt.figure(figsize=(8, 6))
 plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], marker='*', s=150, c='Chartreuse', label='Centroids')
 plt.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1], c=labels)
-plt.title("K-means Clustering")
+plt.title(f"K-means Clustering\n{modelName}", pad=10)
 
 for i in range(0, len(reduced_embeddings), 4):
     # group by scenario
@@ -72,25 +72,6 @@ for i in range(0, len(reduced_embeddings), 4):
 for i, (x, y) in enumerate(reduced_embeddings):
     plt.annotate(i, (x, y), textcoords="offset points", xytext=(0,10), ha='center')  
 plt.show()
-
-#########################################################################################
-
-# # Get cosine similarity
-# similarities = model.similarity(embeddings, embeddings)
-
-
-# lowerTriangle = []
-# for i in range(len(documents)):
-#     for j in range(i):
-#         lowerTriangle.append(similarities[i][j].item())
-# plt.figure(figsize=(9, 7))
-# plt.hist(lowerTriangle, 50, density=True)
-# plt.title(f'Distribution of All Cosine Similarities\n{modelName}')
-# plt.xlabel('Similarity Score')
-# plt.ylabel('Frequency')
-# plt.savefig(f'results/{modelName}/graphs/allScenHist.png')
-
-# plt.show()
 
 #########################################################################################
 plt.close()
