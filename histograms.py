@@ -45,6 +45,18 @@ def histogramPairs(documents, model):
 
     return lowerTriangleAll, lowerTriangleSim
 
+allScenariosLSA = []
+sameScenariosLSA = []
+with open('allScenariosLSA.txt', 'r') as f:
+    for line in f:
+        number = float(line.strip())
+        allScenariosLSA.append(number)
+
+with open('sameScenariosLSA.txt', 'r') as f:
+    for line in f:
+        number = float(line.strip())
+        sameScenariosLSA.append(number)
+
 with open('Justifications1Col.txt', 'r') as file:
     documents = file.readlines()
 
@@ -53,53 +65,67 @@ documents = [line.strip() for line in documents]
 modelName = 'sentence-transformers/all-mpnet-base-v2'
 model = SentenceTransformer(modelName)
 arr1, arr2 = histogramPairs(documents, model)
-fig, axes = plt.subplots(nrows=2, ncols=4)
-axes[0][0].hist(arr1, range=(-.1,1), bins=50, density=True, edgecolor='black')
-axes[0][0].set_title('all-mpnet-base-v2\nAll Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
-axes[0][0].set_ylabel('Frequency')
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(9,7), sharex=False)
 
-axes[1][0].hist(arr2, range=(-.1,1), bins=15, density=True, edgecolor='black')
-axes[1][0].set_title('Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
+axes[0][0].hist(arr1, range=(-.1,1), bins=50, density=False, edgecolor='black')
+axes[0][0].set_title('all-mpnet-base-v2\n(a) -- All Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
+axes[0][0].set_ylabel('Frequency')
+# axes[0][0].set_xlabel('(a)')
+
+axes[1][0].hist(arr2, range=(-.1,1), bins=15, density=False, edgecolor='black')
+axes[1][0].set_title('(b) -- Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
 axes[1][0].set_ylabel('Frequency')
 axes[1][0].set_xlabel('Similarity Score')
 
-modelName = 'sentence-transformers/average_word_embeddings_glove.6B.300d'
-model = SentenceTransformer(modelName)
-arr3, arr4 = histogramPairs(documents, model)
-axes[0][1].hist(arr3, range=(-.1,1), bins=50, density=True, edgecolor='black')
-axes[0][1].set_title('average_word_embeddings_glove.6B.300d\nAll Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
-# axes[0][1].set_ylabel('Frequency')
 
-axes[1][1].hist(arr4, range=(-.1,1), bins=15, density=True, edgecolor='black')
-axes[1][1].set_title('Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
+axes[0][1].hist(allScenariosLSA, range=(-.1,1), bins=50, density=False, edgecolor='black')
+axes[0][1].set_title('Latent Semantic Analysis\n(c) -- All Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
+# axes[0][1].set_ylabel('Frequency')
+# axes[0][1].set_xlabel('(c)')
+
+
+axes[1][1].hist(sameScenariosLSA, range=(-.1,1), bins=15, density=False, edgecolor='black')
+axes[1][1].set_title('(d) -- Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
 # axes[1][1].set_ylabel('Frequency')
 axes[1][1].set_xlabel('Similarity Score')
 
-modelName = 'sentence-transformers/sentence-t5-xl'
-model = SentenceTransformer(modelName)
-arr5, arr6 = histogramPairs(documents, model)
-axes[0][2].hist(arr5, range=(-.1,1), bins=50, density=True, edgecolor='black')
-axes[0][2].set_title('sentence-t5-xl\nAll Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
-# axes[0][2].set_ylabel('Frequency')
+# modelName = 'sentence-transformers/average_word_embeddings_glove.6B.300d'
+# model = SentenceTransformer(modelName)
+# arr3, arr4 = histogramPairs(documents, model)
+# axes[0][1].hist(arr3, range=(-.1,1), bins=50, density=True, edgecolor='black')
+# axes[0][1].set_title('average_word_embeddings_glove.6B.300d\nAll Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
+# # axes[0][1].set_ylabel('Frequency')
 
-axes[1][2].hist(arr6, range=(-.1,1), bins=15, density=True, edgecolor='black')
-axes[1][2].set_title('Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
-# axes[1][2].set_ylabel('Frequency')
-axes[1][2].set_xlabel('Similarity Score')
+# axes[1][1].hist(arr4, range=(-.1,1), bins=15, density=True, edgecolor='black')
+# axes[1][1].set_title('Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
+# # axes[1][1].set_ylabel('Frequency')
+# axes[1][1].set_xlabel('Similarity Score')
 
-modelName = 'intfloat/e5-large-v2'
-model = SentenceTransformer(modelName)
-arr7, arr8 = histogramPairs(documents, model)
-axes[0][3].hist(arr7, range=(-.1,1), bins=50, density=True, edgecolor='black')
-axes[0][3].set_title('e5-large-v2\nAll Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
-# axes[0][3].set_ylabel('Frequency')
+# modelName = 'sentence-transformers/sentence-t5-xl'
+# model = SentenceTransformer(modelName)
+# arr5, arr6 = histogramPairs(documents, model)
+# axes[0][2].hist(arr5, range=(-.1,1), bins=50, density=True, edgecolor='black')
+# axes[0][2].set_title('sentence-t5-xl\nAll Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
+# # axes[0][2].set_ylabel('Frequency')
 
-axes[1][3].hist(arr8, range=(-.1,1), bins=15, density=True, edgecolor='black')
-axes[1][3].set_title('Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
-# axes[1][3].set_ylabel('Frequency')
-axes[1][3].set_xlabel('Similarity Score')
+# axes[1][2].hist(arr6, range=(-.1,1), bins=15, density=True, edgecolor='black')
+# axes[1][2].set_title('Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
+# # axes[1][2].set_ylabel('Frequency')
+# axes[1][2].set_xlabel('Similarity Score')
 
-# plt.savefig(f'results/{modelName}/graphs/dualHist.png')
+# modelName = 'intfloat/e5-large-v2'
+# model = SentenceTransformer(modelName)
+# arr7, arr8 = histogramPairs(documents, model)
+# axes[0][3].hist(arr7, range=(-.1,1), bins=50, density=True, edgecolor='black')
+# axes[0][3].set_title('e5-large-v2\nAll Justification Pairs', fontweight='bold', fontsize=9, wrap=True)
+# # axes[0][3].set_ylabel('Frequency')
+
+# axes[1][3].hist(arr8, range=(-.1,1), bins=15, density=True, edgecolor='black')
+# axes[1][3].set_title('Matching Scenarios Only', fontweight='bold', fontsize=8, wrap=True)
+# # axes[1][3].set_ylabel('Frequency')
+# axes[1][3].set_xlabel('Similarity Score')
+
+# plt.savefig(f'results/{modelName}/graphs/quadHist.png')
 
 plt.show()
 

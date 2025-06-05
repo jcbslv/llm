@@ -12,7 +12,7 @@ model = SentenceTransformer(modelName)
     # device="cpu",
     # config_kwargs={"use_memory_efficient_attention": False, "unpad_inputs": False})
 
-with open('Justifications1Col.txt', 'r') as file:
+with open('truth1.txt', 'r') as file:
     documents = file.readlines()
 
 documents = [line.strip() for line in documents]
@@ -52,18 +52,18 @@ width = 0.35
 
 # fig, ax = plt.subplots()
 plt.figure(figsize=(9, 7))
-rect1 = plt.bar(x-width/2, lsaAllScenario, width, label='LSA')
+rect1 = plt.bar(x-width/2, lsaTruth1, width, label='LSA')
 plt.bar_label(rect1, padding=3)
 rect2 = plt.bar(x+width/2, pairMedians, width, label='LLM')
 plt.bar_label(rect2, padding=3)
 
-plt.title(f'Median Similarity Scores Across Same Scenario Pairs\n{modelName}', pad=10)
+plt.title(f'Median Similarity Scores Across Same Scenario Pairs\nWith Ground Truth 1\n{modelName}', pad=10)
 plt.ylabel('Median Similarity Score')
 plt.xlabel('Justification Pairs')
 # ax.set_xticks(x + width, xLabels)
 plt.xticks(x, xLabels)
 plt.legend(loc='upper left', ncols=2)
-plt.savefig(f'results/{modelName}/graphs/compareBar.png') 
+plt.savefig(f'results/{modelName}/graphs/truth1CompareBar.png') 
 plt.show()
 plt.close()
 
