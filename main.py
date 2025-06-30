@@ -41,11 +41,11 @@ for i in range(0, len(documents), 4):
 
 # Histogram Same Scenario ####################################################################################################
 
-# plt.figure(figsize=(9, 7))
-# plt.hist(lowerTriangle, 15, density=True)
-# plt.title(f'Distribution of Cosine Similarities\nWithin Same Scenarios\n{modelName}',pad=10)
-# plt.xlabel('Similarity Score')
-# plt.ylabel('Frequency')
+plt.figure(figsize=(9, 7))
+plt.hist(lowerTriangle, 15, density=True)
+plt.title(f'Distribution of Cosine Similarities\nWithin Same Scenarios\n{modelName}',pad=10)
+plt.xlabel('Similarity Score')
+plt.ylabel('Frequency')
 # plt.savefig(f'results/{modelName}/graphs/sameScenHist.png')
 # plt.close()
 

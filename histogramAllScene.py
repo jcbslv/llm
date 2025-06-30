@@ -41,7 +41,7 @@ plt.hist(lowerTriangle, 50, density=True, edgecolor='black')
 plt.title(f'Distribution of All Cosine Similarities\n{modelName}')
 plt.xlabel('Similarity Score')
 plt.ylabel('Frequency')
-plt.savefig(f'results/{modelName}/graphs/allScenHist.png')
+# plt.savefig(f'results/{modelName}/graphs/allScenHist.png')
 
 plt.show()
 
