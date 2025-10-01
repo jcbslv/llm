@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from chooseModel import chooseModel
 
-modelName = chooseModel()   
+# modelName = chooseModel()   
 model = SentenceTransformer(modelName)
     # "dunzhang/stella_en_1.5B_v5", trust_remote_code=True)
     # "dunzhang/stella_en_400M_v5",

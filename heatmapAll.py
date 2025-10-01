@@ -3,8 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from chooseModel import chooseModel
 
-modelName = chooseModel() 
-# modelName += ', trust_remote_code=True'  
+modelName = chooseModel()   
 model = SentenceTransformer(modelName)
     
 ##########################################################################################
@@ -21,17 +20,10 @@ embeddings = model.encode(documents, normalize_embeddings=False)
 # Get cosine similarity
 similarities = model.similarity(embeddings, embeddings)
 
-# Turn into vector
-lowerTriangle = []
-for i in range(len(documents)):
-    for j in range(i):
-        lowerTriangle.append(similarities[i][j].item())
-
-plt.figure(figsize=(9, 7))
-plt.hist(lowerTriangle, 50, density=False, edgecolor='black')
-plt.title(f'Distribution of All Cosine Similarities\n{modelName}')
-plt.xlabel('Similarity Score')
-plt.ylabel('Frequency')
-# plt.savefig(f'results/{modelName}/graphs/allScenHist.png')
+# heatmaps
+plt.figure(figsize=(9,7))
+plt.imshow(similarities, cmap='Blues', interpolation='none')
+plt.colorbar(label='Cosine Similarity')
+plt.title('Cosine Similarity Heatmap')
 plt.show()
 plt.close()
